@@ -290,16 +290,16 @@ static dispatch_queue_t YBIBImageProcessingQueue(void) {
 		__strong typeof(wSelf) self = wSelf;
 		if (error) {
 			if (!self.downloadErrorBack) {
-				
 				self.loadingStatus = YBIBImageLoadingStatusNone;
 				[self.delegate yb_imageDownloadFailedForData:self];
 				return;
 			}
-			YBIBImageDataReDownloadUnit *unit = self.downloadErrorBack(self.imageURL.absoluteString);
-			self.reDownloadUnit = unit;
-			unit.redownloadBlock = ^(NSString * _Nonnull imageUrl) {
-				[self loadURL_reDownloadWithOriginUrlStr:self.imageURL.absoluteString newUrlStr:imageUrl];
-			};
+			if (error.code == -1000 || error.code == -1001 || error.code == -2002) {
+				self.loadingStatus = YBIBImageLoadingStatusNone;
+				[self.delegate yb_imageDownloadFailedForData:self];
+				return;
+			}
+			[self loadURL_loadErrorWithOrigin:self.imageURL.absoluteString error:error];
 			
 		} else {
 			YBIB_DISPATCH_ASYNC(YBIBImageProcessingQueue(), ^{
@@ -321,6 +321,15 @@ static dispatch_queue_t YBIBImageProcessingQueue(void) {
 		}
 	}];
 	
+}
+
+- (void)loadURL_loadErrorWithOrigin:(NSString *)originUrl error:(NSError *)error {
+	YBIBImageDataReDownloadUnit *unit = self.downloadErrorBack(self.imageURL.absoluteString);
+	self.reDownloadUnit = unit;
+	__weak typeof(self) wSelf = self;
+	unit.redownloadBlock = ^(NSString * _Nonnull imageUrl) {
+		[wSelf loadURL_reDownloadWithOriginUrlStr:wSelf.imageURL.absoluteString newUrlStr:imageUrl];
+	};
 }
 
 - (void)loadURL_reDownloadWithOriginUrlStr:(NSString *)originUrlStr newUrlStr:(NSString *)newUrlStr {
