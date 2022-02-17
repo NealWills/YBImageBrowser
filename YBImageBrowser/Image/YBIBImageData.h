@@ -39,7 +39,7 @@ typedef void (^YBIBImageScrollViewStatusBlock)(YBIBImageData *imageData, UIScrol
 
 @interface YBIBImageDataReDownloadUnit: NSObject
 
-@property (nonatomic, copy) NSString *(^redownloadBlock)(NSString *imageUrl);
+@property (nonatomic, copy) void (^redownloadBlock)(NSString *imageUrl);
 
 @end
 
@@ -49,6 +49,7 @@ typedef void (^YBIBImageScrollViewStatusBlock)(YBIBImageData *imageData, UIScrol
 @interface YBIBImageData : NSObject <YBIBDataProtocol>
 
 @property (nonatomic, strong) YBIBImageDataReDownloadUnit *reDownloadUnit;
+@property (nonatomic, copy) YBIBImageDataReDownloadUnit *(^downloadErrorBack)(NSString *originUrlStr);
 /// 本地图片名字
 @property (nonatomic, copy, nullable) NSString *imageName;
 

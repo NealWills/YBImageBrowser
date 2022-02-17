@@ -289,13 +289,18 @@ static dispatch_queue_t YBIBImageProcessingQueue(void) {
 		if (!finished) return;
 		__strong typeof(wSelf) self = wSelf;
 		if (error) {
-			if (self.reDownloadUnit.redownloadBlock) {
+			if (!self.downloadErrorBack) {
+				
 				self.loadingStatus = YBIBImageLoadingStatusNone;
 				[self.delegate yb_imageDownloadFailedForData:self];
 				return;
 			}
-			NSString *newUrl = self.reDownloadUnit.redownloadBlock(self.imageURL.absoluteString);
-			[self loadURL_reDownloadWithOriginUrlStr:self.imageURL.absoluteString newUrlStr:newUrl];
+			YBIBImageDataReDownloadUnit *unit = self.downloadErrorBack(self.imageURL.absoluteString);
+			self.reDownloadUnit = unit;
+			unit.redownloadBlock = ^(NSString * _Nonnull imageUrl) {
+				[self loadURL_reDownloadWithOriginUrlStr:self.imageURL.absoluteString newUrlStr:imageUrl];
+			};
+			
 		} else {
 			YBIB_DISPATCH_ASYNC(YBIBImageProcessingQueue(), ^{
 				if (self->_freezing) {
