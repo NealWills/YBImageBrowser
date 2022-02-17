@@ -40,6 +40,7 @@ typedef void (^YBIBImageScrollViewStatusBlock)(YBIBImageData *imageData, UIScrol
 @interface YBIBImageDataReDownloadUnit: NSObject
 
 @property (nonatomic, copy) void (^redownloadBlock)(NSString *imageUrl);
+@property (nonatomic, copy) void (^redownloadSuccessBlock)(NSString *originUrl, NSString *newUrl);
 
 @end
 

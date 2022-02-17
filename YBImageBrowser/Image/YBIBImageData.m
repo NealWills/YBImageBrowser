@@ -358,6 +358,9 @@ static dispatch_queue_t YBIBImageProcessingQueue(void) {
 			return;
 		} else {
 			__strong typeof(wSelf) self = wSelf;
+			if (self.reDownloadUnit.redownloadSuccessBlock) {
+				self.reDownloadUnit.redownloadSuccessBlock(originUrlStr, newUrlStr);
+			}
 			YBIB_DISPATCH_ASYNC(YBIBImageProcessingQueue(), ^{
 				if (self->_freezing) {
 					self.loadingStatus = YBIBImageLoadingStatusNone;
