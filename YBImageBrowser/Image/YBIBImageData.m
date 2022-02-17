@@ -308,6 +308,8 @@ static dispatch_queue_t YBIBImageProcessingQueue(void) {
 					return;
 				}
 				YBImage *image = [YBImage imageWithData:data scale:UIScreen.mainScreen.scale decodeDecision:decision];
+				SDImageCache *manager = [SDImageCache sharedImageCache];
+				[manager storeImage:image imageData:data forKey:self.imageURL.absoluteString cacheType:(SDImageCacheTypeAll) completion:^{ }];
 				YBIB_DISPATCH_ASYNC_MAIN(^{
 					if (!self) return;
 					self.loadingStatus = YBIBImageLoadingStatusNone;
@@ -367,6 +369,8 @@ static dispatch_queue_t YBIBImageProcessingQueue(void) {
 					return;
 				}
 				YBImage *image = [YBImage imageWithData:data scale:UIScreen.mainScreen.scale decodeDecision:decision];
+				SDImageCache *manager = [SDImageCache sharedImageCache];
+				[manager storeImage:image imageData:data forKey:originUrlStr cacheType:(SDImageCacheTypeAll) completion:^{ }];
 				YBIB_DISPATCH_ASYNC_MAIN(^{
 					if (!self) return;
 					self.loadingStatus = YBIBImageLoadingStatusNone;
