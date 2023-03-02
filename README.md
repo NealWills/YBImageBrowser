@@ -21,7 +21,7 @@ Email: nealwills93@gmail.com | Wechat: IsZiNanHere
 
 #### 关于issue
 
-该项目只是针对于当前公司的需求，若issue不麻烦，会顺手改掉，若设计项目本身结构，恕能力有限
+该项目只是针对于当前公司的需求，若issue不麻烦，会顺手改掉，若涉及项目本身结构，恕能力有限
 
 #### 关于 3.x 版本 (使用 2.x 版本请切换到 store_2.x 分支)
 
@@ -29,8 +29,7 @@ Email: nealwills93@gmail.com | Wechat: IsZiNanHere
 
 #### 关于 私人化后版本
 
-· 3.1.2 YBIBImageDate增加了 qcDecoder 回调，用于初次失败后进行腾讯云相关私有桶认证解密
-
+· 3.1.2 YBIBImageDate增加了 qcDecoder 回调，用于初次失败后进行腾讯云相关私有桶认证解密（详见demo）
 
 # 目录
 
