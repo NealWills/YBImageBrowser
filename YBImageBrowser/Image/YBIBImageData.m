@@ -287,7 +287,7 @@ static dispatch_queue_t YBIBImageProcessingQueue(void) {
                 }
                 YBImageDecodeDecision decision = [self defaultDecodeDecision];
                 YBImage *image = [YBImage imageWithData:data scale:UIScreen.mainScreen.scale decodeDecision:decision];
-                [SDImageCache.sharedImageCache storeImageDataToDisk:data forKey:self.imageURL];
+                [SDImageCache.sharedImageCache storeImageDataToDisk:data forKey:self.imageURL.absoluteString];
                 YBIB_DISPATCH_ASYNC_MAIN(^{
                     __strong typeof(wSelf) self = wSelf;
                     if (!self) return;

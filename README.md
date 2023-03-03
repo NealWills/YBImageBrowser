@@ -77,8 +77,8 @@ Email: nealwills93@gmail.com | Wechat: IsZiNanHere
 
 1. 在 Podfile 中添加：
 ```
-pod 'YBImageBrowser'
-pod 'YBImageBrowser/Video'  //视频功能需添加
+pod 'YBImageBrowser', :git=>"https://github.com/NealWills/YBImageBrowser.git"
+pod 'YBImageBrowser/Video' :git=>"https://github.com/NealWills/YBImageBrowser.git"  //视频功能需添加
 ```
 2. 执行 `pod install` 或 `pod update`。
 3. 导入 `<YBImageBrowser/YBImageBrowser.h>`，视频功能需导入`<YBImageBrowser/YBIBVideoData.h>`。
