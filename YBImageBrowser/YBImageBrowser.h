@@ -70,6 +70,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 预加载数量 (默认为 2，低内存设备默认为 0)
 @property (nonatomic, assign) NSUInteger preloadCount;
 
+@property (nonatomic, weak) void(^mediaDidShowBlock)();
+@property (nonatomic, weak) void(^mediaDidDismissBlock)();
+
 /**
  重载数据，请保证数据源被正确修改
  */

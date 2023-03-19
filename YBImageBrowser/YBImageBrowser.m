@@ -41,6 +41,7 @@
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToLongPress:)];
         [self addGestureRecognizer:longPress];
         [self initValue];
+        
     }
     return self;
 }
@@ -192,6 +193,9 @@
         [self build];
         [self setTransitioning:NO isShow:YES];
     }];
+    if (self.mediaDidShowBlock) {
+        self.mediaDidShowBlock();
+    }
 }
 
 - (void)hide {
@@ -216,6 +220,9 @@
         [self removeFromSuperview];
         [self setTransitioning:NO isShow:NO];
     }];
+    if (self.mediaDidDismissBlock) {
+        self.mediaDidDismissBlock();
+    }
 }
 
 - (void)reloadData {
