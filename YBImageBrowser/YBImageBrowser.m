@@ -193,8 +193,8 @@
         [self build];
         [self setTransitioning:NO isShow:YES];
     }];
-    if (self.mediaDidShowBlock) {
-        self.mediaDidShowBlock();
+    if (self.browserDidShowBlock) {
+        self.browserDidShowBlock();
     }
 }
 
@@ -220,8 +220,8 @@
         [self removeFromSuperview];
         [self setTransitioning:NO isShow:NO];
     }];
-    if (self.mediaDidDismissBlock) {
-        self.mediaDidDismissBlock();
+    if (self.browserDidDismissBlock) {
+        self.browserDidDismissBlock();
     }
 }
 
